@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>EcoScientia: Student Dashboard</title>
+	<link rel="stylesheet" type= ="text/css" href="styles.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Notable&family=Quattrocento:wght@400;700&display=swap" rel="stylesheet">
+	<style>
+		* {
+		  box-sizing: border-box;
+		  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+		}
+
+		body {
+		  margin: 0;
+		  min-height: 100vh;
+		  display: flex;
+		  justify-content: center;
+		  align-items: center;
+		  background: linear-gradient(135deg, #dff5e1, #fff6cc);
+		  background-image: URL("bg.png");
+			background-size: cover;
+			background-repeat: no-repeat;
+			background-position: center;
+			background-opacity: 0.5;
+		}
+
+		.header{
+		  position: fixed;
+		  top: 0;
+
+		  width: 100%;
+		  height: 60px;
+
+		  background-color: #2f7d32;
+		  color: white;
+
+		  display: flex;
+		  align-items: center;
+		  padding: 0 20px;
+
+		  z-index: 1000;
+		}
+		
+		}
+		.logout-button {
+		  padding-left: 0.75rem;
+		  padding-right: 0.75rem;
+		  padding-top: 0.5rem;
+		  padding-bottom: 0.5rem;
+		  background-color: rgb(241 245 249 / 1);
+		  border-radius: 0.375rem;
+		  outline-style: solid;
+		  outline-width: 0px;
+		  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+		  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+		  transition-duration: 150ms;
+		}
+
+		.logout-button:hover {
+		  background-color: rgb(226 232 240 / 1);
+		  outline-width: 2px;
+		  outline-color: #cbd5e1;
+		}
+
+		.main-grid {
+		  max-width: 1200px;
+		  margin-top: 70px;
+		  margin-left: auto;
+		  margin-right: auto;
+		  padding-left: 1.5rem;
+		  padding-right: 1.5rem;
+		  padding-top: 1.5rem;
+		  padding-bottom: 1.5rem;
+		  display: grid;
+		  grid-template-columns: 280px 1fr;
+		  gap: 1.5rem;
+		}
+
+		.sidebar {
+		  background-color: rgb(255 255 255 / 1);
+		  border-width: 1px;
+		  border-color: rgb(226 232 240 / 1);
+		  border-radius: 0.5rem;
+		  padding: 1rem;
+		  position: sticky;
+		  top: 1rem;
+		}
+
+		.sidebar-header {
+		  display: flex;
+		  align-items: center;
+		  justify-content: space-between;
+		  margin-bottom: 0.75rem;
+		}
+
+		.sidebar-title {
+		  font-weight: 600;
+		}
+
+		.chapter-list {
+		  display: flex;
+		  flex-direction: column;
+		  gap: 0.5rem;
+		}
+
+		.chapter-item-unlocked {
+		  display: flex;
+		  align-items: center;
+		  justify-content: space-between;
+		  gap: 0.5rem;
+		  padding: 0.75rem;
+		  border-radius: 0.375rem;
+		  border-width: 1px;
+		  border-color: rgb(226 232 240 / 1);
+		  cursor: pointer;
+		}
+
+		.chapter-item-locked {
+		  display: flex;
+		  align-items: center;
+		  justify-content: space-between;
+		  gap: 0.5rem;
+		  padding: 0.75rem;
+		  border-radius: 0.375rem;
+		  border-width: 1px;
+		  border-color: rgb(226 232 240 / 1);
+		  cursor: pointer;
+		}
+		
+		.chapter-item-unlocked:hover {
+		  border-color: rgb(11 95 255 / 1);
+		  background-color: rgb(239 246 255 / 1);
+		}
+		
+		.chapter-item-locked:hover {
+		  border-color: rgb(11 95 255 / 1);
+		  background-color: rgb(239 246 255 / 1);
+		}
+		
+		.chapter-item-left {
+		  display: flex;
+		  align-items: center;
+		  gap: 0.5rem;
+		}
+
+		.chapter-icon {
+		  width: 1rem;
+		  height: 1rem;
+		}
+
+		.chapter-name {
+		  color: rgb(30 41 59 / 1);
+		  font-weight: 500;
+		}
+
+		.chapter-status {
+		  font-size: 0.75rem;
+		  line-height: 1rem;
+		  color: rgb(100 116 139 / 1);
+		}
+		
+		.content {
+		  margin-left: auto;
+		  margin-right: auto;
+		  padding-left: 0.5rem;
+		  padding-right: 0.5rem;
+		  padding-top: 0.5rem;
+		  padding-bottom: 0.5rem;
+		  display: block
+		  background-color: rgb(255 255 255 / 1);
+		  border-width: 1px;
+		  border-color: rgb(226 232 240 / 1);
+		  border-radius: 0.5rem;
+		}
+	</style>
+</head>
+
+<body class="stud-dash">
+	<header class="header" id="sdhead">
+		<div class="header-container" id="sdhc">
+			<div class="brand-text-group" id="sdbrand">
+				<span class="brand-name" id="sdbn">EcoScientia</span>
+			</div>
+			<nav class="top-nav">
+				<div class="user-status" id="userstatus">
+					<img src="https://api.iconify.design/lucide-user.svg?color=%231E293B" alt="Profile" class="profile-icon" id="userprofile"/>
+					<span class="user-name" id="userNameDisplay">Guest</span>
+					<button class="logout-button" id="logoutBtn" type="button">Log Out</button>
+				</div>
+			</nav>
+		</div>
+	</header>
+	
+	<div class="main-grid" id="sdgrid">
+
+		<!-- Sidebar -->
+		<aside class="sidebar">
+			<div class="sidebar-header" id="sbh">
+				<span class="sidebar-title" id="sbt">Lessons</span>
+			</div>
+			<ul class="chapter-list" id="chapterlist">
+				<li data-id="intro" class="chapter-item-unlocked">
+					<div onclick="window.location.href='intro.html'">
+						<span class="chapter-name" id="introchap"><b>Introduction</b></span>
+					</div>
+				</li>
+				<li data-id="ch1" class="chapter-item-locked">
+					<div onclick="window.location.href='ch1.html'">
+						<span class="chapter-name" id="chapname1"><b>Activity 1</b><br>Protect or Neglect?</span>
+					</div>
+				</li>
+				<li data-id="ch2" class="chapter-item-locked">
+					<div onclick="window.location.href='ch2.html'">
+						<span class="chapter-name" id="chapname2"><b>Activity 2</b><br>Which is Which?</span>
+					</div>
+				</li>
+				<li data-id="ch3" class="chapter-item-locked">
+					<div onclick="window.location.href='ch3.html'">
+						<span class="chapter-name" id="chapname3"><b>Activity 3</b><br>Show and Tell!</span>
+					</div>
+				</li>
+				<li data-id="lec" class="chapter-item-locked">
+					<div onclick="window.location.href='lec.html'">
+						<span class="chapter-name" id="chapnamel"><b>Lesson</b><br>Impacts of Human Activities on Ecosystems</span>
+					</div>
+				</li>
+				<li data-id="ch4" class="chapter-item-locked">
+					<div onclick="window.location.href='ch4.html'">
+						<span class="chapter-name" id="chapname4"><b>Activity 4</b><br>My Town, My Rule</span>
+					</div>
+				</li>
+				<li data-id="ch5" class="chapter-item-locked">
+					<div onclick="window.location.href='assessment.html'">
+						<span class="chapter-name" id="assessment"><b>Assessment</b><br>Let's Wrap It Up!</span>
+					</div>
+				</li>
+				<li data-id="ch6" class="chapter-item-locked">
+					<div onclick="window.location.href='ch5.html'">
+						<span class="chapter-name" id="chapname5"><b>Activity 5</b><br>Ecosystem Pledge Wall</span>
+					</div>
+				</li>
+			</ul>
+		</aside>
+
+		<!-- Main Content -->
+		<main class="content">
+			<div id="main-content">
+			
+				<h2>Introductory Message</h2>
+				<p>The EcoScientia: Web-based SEL-Integrated Module (Web-SELM) was carefully prepared to help you, our dear learners to understand and appreciate the impact of human activities in an ecosystems. It will guide you in exploring how people's actions can either protect or harm the environment and how you as a studentcan become an advocate of ecological balance and be a student with environmental sensibility.</p>
+				<p>The activities, discussions, and reflections in this module are designed to enhance not only your scientific understanding but also your social and emotional awareness toward the living world around you. You will be given opportunities to think critically, act responsibly, and reflect on your own role in caring for nature. Each part of this module has been in arranged in a way that allows you to learn independently and meaningfully. Read the instructions carefully, complete each task honestly and answer all activities on a separate sheet of paper.</p>
+				<p>If you find any part of this module, difficult, don't hesitate to ask your teacher or parent for guidance. Remember, learning in most meaningful when you take initiative and stay curious. Enjoy your journey as a young steward of the environment. Let this lesson remind you that small actions can make a big difference in  keeping our planet healthy and full of life.</p>
+				<p>The scope of this module allows it to be used in different learning setups, whether online or home-based. The language used considers the diverse backgrounds of learners, and the activities are designed to help you think critically, reflect emotionally, and act responsibly as a yound steward of nature.</p>
+			
+			</div>
+		</main>
+
+	</div>
+	
+	<script>
+		const chapters = document.querySelectorAll(".chapter-item");
+		const content = document.getElementById("main-content");
+
+		chapters.forEach(chapter => {
+
+		chapter.addEventListener("click", function(){
+
+			if(this.classList.contains("locked")) return;
+
+			const id = this.dataset.id;
+
+			setStatus(this,"In Progress");
+
+			loadChapter(id);
+
+		});
+
+		});
+
+
+		function loadChapter(id){
+
+		fetch("chapters/" + id + ".html")
+		.then(res => res.text())
+		.then(data => {
+
+		content.innerHTML = data;
+
+		});
+
+		}
+		
+		function completeChapter(id){
+
+		const current = document.querySelector(`[data-id="${id}"]`);
+
+		setStatus(current,"Completed");
+
+		unlockNext(current);
+		
+		localStorage.setItem("intro","completed");
+	</script>
+  </body>
+</html>
