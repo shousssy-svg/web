@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>EcoScientia: Student Dashboard</title>
+	<link rel="stylesheet" type= ="text/css" href="styles.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Notable&family=Quattrocento:wght@400;700&display=swap" rel="stylesheet">
+	<style>
+		* {
+		  box-sizing: border-box;
+		  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+		}
+
+		body {
+		  margin: 0;
+		  min-height: 100vh;
+		  display: flex;
+		  justify-content: center;
+		  align-items: center;
+		  background: linear-gradient(135deg, #dff5e1, #fff6cc);
+		  background-image: URL("bg.png");
+			background-size: cover;
+			background-repeat: no-repeat;
+			background-position: center;
+			background-opacity: 0.5;
+		}
+		
+		.header {
+		  position: fixed;
+		  top: 0;
+
+		  width: 100%;
+		  height: 60px;
+
+		  background-color: #2f7d32;
+		  color: white;
+
+		  display: flex;
+		  align-items: center;
+		  padding: 0 20px;
+
+		  z-index: 1000;
+		}
+		
+		.content {
+		  max-width: 70%;
+		  margin-top: 70px;
+		  margin-left: auto;
+		  margin-right: auto;
+		  padding-left: 1.5rem;
+		  padding-right: 1.5rem;
+		  padding-top: 1.5rem;
+		  padding-bottom: 1.5rem;
+		  display: block
+		}
+		
+		.main-content {
+		  background-color: white;
+		  border-width: 1px;
+		  border-color: rgb(226 232 240 / 1);
+		  border-radius: 0.5rem;
+		  padding: 1rem;
+		  position: sticky;
+		  top: 1rem;
+		}
+		
+		.container {
+		  background: linear-gradient(135deg, #dff5e1, #fff6cc);
+		  width: 80%
+		  border-radius: 0.5rem;
+		  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+		  padding: 1rem;
+		  position: sticky;
+		}
+		
+		.container img {
+		  width: 90%;
+		  height: auto;
+		  align-items: center;
+		  display: block;
+		  padding: 0px 0px 0px 0px
+		  margin: auto;
+		}
+	</style>
+</head>
+
+<body class="intro">
+	<header class="header" id="sdhead">
+			<div class="header-container" id="sdhc">
+				<div class="brand-text-group" id="sdbrand">
+					<span class="brand-name" id="sdbn">EcoScientia</span>
+				</div>
+			</div>
+	</header>
+	
+	<main class="content">
+		<div class="container">
+			<img src="sprout.png">
+		</div>
+		
+		<div class="main-content" id="main-content">
+			
+			<h2>Introduction to Lesson</h2>
+			<p>We live on a planet full of life, with plants, animals, and people all connected and depending on each other to survive. This network of life, along with the air, water, and soil that support it, is called an ecosystem. The things we do, like cutting down trees, polluting rivers, or producing too much waste, can disrupt this balance and harm both nature and ourselves. By being aware of our actions and making thoughtful choices, we can protect the environment and help all living things thrive.<br>
+			   Welcome to your web-based SEL-integrated module! You can explore lessons, activities, and resources online at your own pace. Interactive tasks will check your understanding and help you reflect on how human actions impact ecosystems.<br>
+			   As you move through the module, you’ll learn key concepts, practice making responsible choices, and see the effects of your decisions in different scenarios. This is your space to explore, experiment, and connect learning to real life. And to make it more fun, you’ll have a guide by your side.</p>
+			<p>This module contains:</p>
+				<ul class="lesson-bullet-list">
+					<li>Lesson 1 - Human Impacts on Ecosystems</li>
+				</ul>
+			<p>After going through this module, you are expected to:</p>
+				<ul class="objective-bullet-list">
+					<li>Identify how different human activities affect various ecosystems,</li>
+					<li>Demonstrate practical actions or solutions that minimize the negative impacts of human activities on ecosystems, and</li>
+					<li>Reflect on how human actions affect  environmental sensibility towards plants, animals, and human.</li>
+				</ul>
+		<button onclick="window.location.href='ch1.html'">Finish Activity</button>
+		<button onclick="window.location.href='student-assignments.html'">⬅ Back to Dashboard</button>
+		</div>
+		
+	</main>
+	
+
+</body>
+</html>
