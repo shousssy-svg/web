@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>EcoScientia: Student Dashboard</title>
+	<link rel="stylesheet" type= ="text/css" href="styles.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Notable&family=Quattrocento:wght@400;700&display=swap" rel="stylesheet">
+	<style>
+		* {
+		  box-sizing: border-box;
+		  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+		}
+
+		body {
+		  margin: 0;
+		  min-height: 100vh;
+		  display: flex;
+		  justify-content: center;
+		  align-items: center;
+		  background: linear-gradient(135deg, #dff5e1, #fff6cc);
+		  background-image: URL("bg.png");
+			background-size: cover;
+			background-repeat: no-repeat;
+			background-position: center;
+			background-opacity: 0.5;
+		}
+		
+		.header {
+		  position: fixed;
+		  top: 0;
+
+		  width: 100%;
+		  height: 60px;
+
+		  background-color: #2f7d32;
+		  color: white;
+
+		  display: flex;
+		  align-items: center;
+		  padding: 0 20px;
+
+		  z-index: 1000;
+		}
+
+		.content {
+		  max-width: 70%;
+		  margin-top: 70px;
+		  margin-left: auto;
+		  margin-right: auto;
+		  padding-left: 1.5rem;
+		  padding-right: 1.5rem;
+		  padding-top: 1.5rem;
+		  padding-bottom: 1.5rem;
+		  display: block
+		}
+		
+		.container {
+		  background: linear-gradient(135deg, #dff5e1, #fff6cc);
+		  width: 80%
+		  border-radius: 0.5rem;
+		  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+		  padding: 1rem;
+		  position: sticky;
+		}
+		
+		.container img {
+		  width: 90%;
+		  height: auto;
+		  align-items: center;
+		  display: block;
+		  padding: 0px 0px 0px 0px
+		  margin: auto;
+		}
+		
+		#upload-section {
+		  background: #f4f4f4;
+		  padding: 20px;
+		  border-radius: 8px;
+		  margin-bottom:30px;
+		  text-align: center;
+		}
+		
+		#gallery-grid {
+		  display: grid;
+		  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+		  gap: 20px;
+		  padding: 10px;
+		}
+		
+		.post-card {
+		  border: 1px solid #ddd;
+		  border-radius: 10px;
+		  background: #fff;
+		  padding: 10px;
+		  background: white;
+		  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+		}
+		
+		.post-card img {
+		  width: 100%;
+		  height: 200px;
+		  object-fit: cover; /* Keeps images uniform */
+		  border-radius: 5px;
+		}
+		
+		.post-card p {
+		  margin-top: 10px;
+		  font-family: sans-serif;
+		  color: #333;
+		}
+	</script>
+</head>
+
+<body class="ch3">
+	<header class="header" id="sdhead">
+			<div class="header-container" id="sdhc">
+				<div class="brand-text-group" id="sdbrand">
+					<span class="brand-name" id="sdbn">EcoScientia</span>
+				</div>
+			</div>
+	</header>
+	
+	<main class="content">
+		<div class="container">
+			<img src="sprout.png">
+		</div>
+		
+		<div class="upload section" id="upload-section">
+		
+			<h2>Activity 3: Show and Tell!</h2>
+			<h3>Instructions</h3>
+			<p>In this activity, you are going to submit at least three (3) photos that depicts the problems or issues the school has in terms of ecological sensitivity. Describe each photo with at least 2-3 sentences.</p>
+			
+					<input type="file" id="imageImput" accept="image/*">
+					<input type="text" id="captionInput" placeholder="Write a meaningful caption...">
+					<button onclick="postToGallery()">Post to Gallery</button>
+				</div>
+				
+			<hr>
+			
+			<h2>Class Gallery</h2>
+			<div id="gallery-grid">
+				</div>
+			
+		<button onclick="window.location.href='lec.html'">Finish Activity</button>
+		<button onclick="window.location.href='student-assignments.html'">⬅ Back to Dashboard</button>
+		
+		</div>
+		
+<script>
+	function postToGallery() {
+		const imageInput = document.getElementById('imageInput');
+		const captionInput = document.getElementById('captionInput');
+		const gallery = document.getElementById('gallery-grid');
+		
+		if (imageInput.files && imageInput.files[0]) {
+			const reader = new FileReader();
+			
+			reader.onload = function(e) {
+			  // Create Post container
+			  const card = document.createElement('div');
+			  card.className = 'post-card';
+			  
+			  // Create content
+			  const img = document.createElement('img');
+			  img.src = e.target.result;
+			  
+			  const caption = document.createElement('p'); 
+			  caption.innerText = captionInput.value || "Shared an environmental action!";
+			  
+			  // Assemble and Add to Wall
+			  card.appendChild(img);
+			  card.appendChild(caption);
+			  wall.appendChild(card);
+			  
+			  // Reset Inputs
+			  imageInput.value = "";
+			  captionInput.value = "";
+			};
+			
+			reader.readAsDataURL(imageInput.files[0]);
+		} else {
+		  alert("Please select a photo to share!");
+		}
+	}
+	
+
+</script>
+</body>
+</html>

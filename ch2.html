@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>EcoScientia: Student Dashboard</title>
+	<link rel="stylesheet" type= ="text/css" href="styles.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Notable&family=Quattrocento:wght@400;700&display=swap" rel="stylesheet">
+	<style>
+		* {
+		  box-sizing: border-box;
+		  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+		}
+
+		body {
+		  margin: 0;
+		  min-height: 100vh;
+		  display: flex;
+		  justify-content: center;
+		  align-items: center;
+		  background: linear-gradient(135deg, #dff5e1, #fff6cc);
+		  background-image: URL("bg.png");
+			background-size: cover;
+			background-repeat: no-repeat;
+			background-position: center;
+			background-opacity: 0.5;
+		}
+		
+		.header {
+		  position: fixed;
+		  top: 0;
+
+		  width: 100%;
+		  height: 60px;
+
+		  background-color: #2f7d32;
+		  color: white;
+
+		  display: flex;
+		  align-items: center;
+		  padding: 0 20px;
+
+		  z-index: 1000;
+		}
+
+		.content {
+		  max-width: 70%;
+		  margin-top: 70px;
+		  margin-left: auto;
+		  margin-right: auto;
+		  padding-left: 1.5rem;
+		  padding-right: 1.5rem;
+		  padding-top: 1.5rem;
+		  padding-bottom: 1.5rem;
+		  display: block
+		}
+		
+		.container {
+		  background: linear-gradient(135deg, #dff5e1, #fff6cc);
+		  width: 80%
+		  border-radius: 0.5rem;
+		  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+		  padding: 1rem;
+		  position: sticky;
+		}
+		
+		.container img {
+		  width: 90%;
+		  height: auto;
+		  align-items: center;
+		  display: block;
+		  padding: 0px 0px 0px 0px
+		  margin: auto;
+		}
+		
+		.activity-container { text-align: center;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+		
+		.drop-zone {
+		  min-height: 120px;
+		  border: 2px dashed #bbb;
+		  margin: 20px;
+		  padding: 15px;
+		  display: flex;
+		  flex-wrap: wrap;
+		  justify-content: center;
+		  gap: 15px;
+		  background-color: #f9f9f9;
+		  transition: background-color 0.3s;
+		}
+		
+		/* Subtle highlihts for the zone */
+		#positive { border-color: #2ecc71; }
+		#negative { border-color: #e74c3c; }
+		
+		drop-zone img {
+		  width: 120px;
+		  height: 120px;
+		  cursor: grab;
+		  border-radius: 10px;
+		  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+		  object-fit: cover;
+		}
+		
+		drop-zone img:active {cursor: grabbing; }
+	</style>
+</head>
+
+<body class="ch2">
+	<header class="header" id="sdhead">
+			<div class="header-container" id="sdhc">
+				<div class="brand-text-group" id="sdbrand">
+					<span class="brand-name" id="sdbn">EcoScientia</span>
+				</div>
+			</div>
+	</header>
+	
+	<main class="content">
+		<div class="container">
+			<img src="sprout.png">
+		</div>
+		
+		<div class="activity container" id="activity-container">
+		
+			<h2>Activity 2: Which is Which?</h2>
+			<h3>Instructions</h3>
+			<p>In this activity, you will look carefully at each picture provided. Observe the details in every image and decide whether it shows a positive or negative environmental status. After examining the pictures, organize them into two groups: <b>Positive Environmental Actions</b> and <b>Negative Environmental Actions</b>.</p>
+			
+			<div id="gallery" class="drop-zone" ondragover="allowDrop (event)" ondrop="drop (event)">
+				<img src="Garbage RA.jpg" draggable="true" id="img1">
+				<img src="Improper segregation.jpg" draggable="true" id="img2">
+				<img src="Industrialization behind PNHS.jpg" draggable="true" id="img3">
+				<img src="Liwasang Pangkalikasan.jpg" draggable="true" id="img4">
+				<img src="Marilao River.jpg" draggable="true" id="img5">
+				<img src="SM Marilao Industrialization.jpg" draggable="true" id="img6">
+			</div>
+			
+			<div class="zones">
+				<div id="positive" class="drop-zone" ondragover="allowDrop (event)" ondrop="drop (event)">
+					<h3>Positive Environmental Actions</h3>
+				</div>
+				
+				<div id="negative" class="drop-zone" ondragover="allowDrop (event)" ondrop="drop (event)">
+					<h3>Negative Environmental Actions</h3>
+				</div>
+			</div>
+			
+		<button onclick="window.location.href='ch3.html'">Finish Activity</button>
+		<button onclick="window.location.href='student-assignments.html'">⬅ Back to Dashboard</button>
+			
+		</div>
+			
+<script>
+	// 1. Tell the images what to do when they start being dragged
+	document.querySelectorAll('img').forEach(img => {
+		img.addEventListener('dragstart', (e) => {
+		e.dataTransfer.setData("text"), e.target.id);
+		});
+	});
+	
+	// 2. Allow the drop zones to receive items
+	funtion allowDrop(e) {
+		e.preventDefault();
+	}
+	
+	// 3. Move the image to the new container
+	function drop(e) {
+		e.preventDefault();
+		const imageId = e.dataTransfer.getData("text");
+		const draggedImage = document.getElementById(imageId);
+		
+		// Find the closest drop-zone (in case they drop it on the text/heading)
+		const dropZone = e.target.closets('.drop-zone');
+		
+		if (dropZone) {
+			dropZone.appendChild(draggedImage);
+		}
+	}
+	
+
+</script>
+</body>
+</html>
