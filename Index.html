@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EcoScientia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Notable&family=Quattrocento:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #dff5e1, #fff6cc);
+    }
+
+    .container {
+      background: #ffffff;
+      width: 420px;
+      border-radius: 20px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+      padding: 30px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 5px;
+      color: #2e7d32;
+      font-size: 2.2rem;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #777;
+      margin-bottom: 25px;
+      font-size: 0.95rem;
+    }
+
+    .tabs {
+      display: flex;
+      margin-bottom: 20px;
+    }
+
+    .tab {
+      flex: 1;
+      text-align: center;
+      padding: 12px;
+      cursor: pointer;
+      border-radius: 12px;
+      font-weight: 600;
+      background: #f2f2f2;
+      margin: 0 5px;
+      transition: 0.3s;
+    }
+
+    .tab.active {
+      background: #c8e6c9;
+      color: #2e7d32;
+    }
+
+    .role-switch {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .role-switch button {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      background: #eeeeee;
+      font-weight: 600;
+    }
+
+    .role-switch button.active {
+      background: #ffecb3;
+      color: #8d6e00;
+    }
+
+    form { display: none; }
+    form.active { display: block; }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #a5d6a7, #fff59d);
+      font-weight: 700;
+      cursor: pointer;
+      color: #2e7d32;
+      margin-top: 10px;
+    }
+
+    .dashboard { display: none; }
+
+    .menu {
+      display: grid;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .menu div {
+      background: #f2f2f2;
+      padding: 12px;
+      border-radius: 10px;
+      text-align: center;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .menu div:hover {
+      background: #c8e6c9;
+    }
+
+    .footer-text {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 0.85rem;
+      color: #777;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- LOGIN / SIGNUP -->
+  <div class="container" id="authContainer">
+    <h1>EcoScientia</h1>
+    <div class="subtitle">Web-based Socio-Emotional Learning Module</div>
+
+    <div class="tabs">
+      <div class="tab active" onclick="switchTab('login')">Login</div>
+      <div class="tab" onclick="switchTab('signup')">Sign Up</div>
+    </div>
+
+    <div class="role-switch">
+      <button class="active" onclick="switchRole('student', this)">Student</button>
+      <button onclick="switchRole('teacher', this)">Teacher</button>
+    </div>
+
+    <form id="login" class="active">
+      <input type="email" placeholder="Email" required />
+      <input type="password" placeholder="Password" required />
+      <button class="submit-btn" type="submit">Login</button>
+    </form>
+
+    <form id="signup">
+      <input type="text" placeholder="Full Name" required />
+      <input type="email" placeholder="Email" required />
+      <input type="password" placeholder="Password" required />
+      <button class="submit-btn" type="submit">Create Account</button>
+    </form>
+
+    <div class="footer-text">© 2026 Ecosentia</div>
+  </div>
+
+  <!-- STUDENT DASHBOARD -->
+  <div class="container dashboard" id="studentDashboard">
+    <h1>Student Dashboard</h1>
+    <div class="subtitle">Welcome to your learning space 🌱</div>
+
+    <div class="menu">
+      <div onclick="window.location.href='student-assignments.html'">Assignments</div>
+    </div>
+
+    <button class="submit-btn" onclick="logout()">Logout</button>
+  </div>
+
+  <!-- TEACHER DASHBOARD -->
+  <div class="container dashboard" id="teacherDashboard">
+    <h1>Teacher Dashboard</h1>
+    <div class="subtitle">Manage your classes 🌍</div>
+
+    <div class="menu">
+      <div onclick="window.location.href='teacher-classes.html'">My Classes</div>
+      <div onclick="window.location.href='teacher-progress.html'">Student Progress</div>
+    </div>
+
+    <button class="submit-btn" onclick="logout()">Logout</button>
+  </div>
+
+<script>
+  let currentRole = 'student';
+
+  const authContainer = document.getElementById('authContainer');
+  const studentDashboard = document.getElementById('studentDashboard');
+  const teacherDashboard = document.getElementById('teacherDashboard');
+
+  function switchTab(tab) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('form').forEach(f => f.classList.remove('active'));
+
+    if (tab === 'login') {
+      document.querySelectorAll('.tab')[0].classList.add('active');
+    } else {
+      document.querySelectorAll('.tab')[1].classList.add('active');
+    }
+
+    document.getElementById(tab).classList.add('active');
+  }
+
+  function switchRole(role, btn) {
+    currentRole = role;
+    document.querySelectorAll('.role-switch button')
+      .forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+
+  function showDashboard() {
+    authContainer.style.display = 'none';
+
+    if (currentRole === 'student') {
+      studentDashboard.style.display = 'block';
+    } else {
+      teacherDashboard.style.display = 'block';
+    }
+  }
+
+  function logout() {
+    studentDashboard.style.display = 'none';
+    teacherDashboard.style.display = 'none';
+    authContainer.style.display = 'block';
+  }
+
+  document.getElementById('login').addEventListener('submit', function(e) {
+    e.preventDefault();
+    showDashboard();
+  });
+
+  document.getElementById('signup').addEventListener('submit', function(e) {
+    e.preventDefault();
+    showDashboard();
+  });
+  
+  function unlockNext(current){
+
+  const next = current.nextElementSibling;
+
+  if(next){
+
+  next.classList.remove("locked");
+
+  setStatus(next,"Not Started");
+
+  }
+
+  }
+  
+  function setStatus(element,status){
+
+  element.querySelector(".chapter-status").textContent = status;
+
+  }
+  
+  
+</script>
+
+</body>
+</html>
