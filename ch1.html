@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>EcoScientia: Student Dashboard</title>
+	<link rel="stylesheet" type= ="text/css" href="styles.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Notable&family=Quattrocento:wght@400;700&display=swap" rel="stylesheet">
+	<style>
+		* {
+		  box-sizing: border-box;
+		  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+		}
+
+		body {
+		  margin: 0;
+		  min-height: 100vh;
+		  display: flex;
+		  justify-content: center;
+		  align-items: center;
+		  background: linear-gradient(135deg, #dff5e1, #fff6cc);
+		  background-image: URL("bg.png");
+			background-size: cover;
+			background-repeat: no-repeat;
+			background-position: center;
+			background-opacity: 0.5;
+		}
+		
+		.header {
+		  position: fixed;
+		  top: 0;
+
+		  width: 100%;
+		  height: 60px;
+
+		  background-color: #2f7d32;
+		  color: white;
+
+		  display: flex;
+		  align-items: center;
+		  padding: 0 20px;
+
+		  z-index: 1000;
+		}
+		
+		#game-container {
+		  text-align: center;
+		  font-family: sans-serif;
+		  margin-top: 50px;
+		  background-color: linear-gradient(135deg, #dff5e1, #fff6cc);
+		}
+		
+		.options {
+		  display: flex;
+		  justify-content: center;
+		  align-items: center;
+		  gap: 20px;
+		}
+		
+		button {
+		  padding: 20px 40px;
+		  font-color: black;
+		  font-size: 1.2rem;
+		  cursor: pointer;
+		  background-color: linear-gradient(135deg, #dff5e1, #fff6cc);
+		  border: none;
+		  border-radius: 8px;
+		  transition: transform 0.2s;
+		}
+		
+		button:hover {
+		  background-color: #2980b9;
+		  transform: scale(1.05);
+		}
+		
+		#result-display {
+		  margin-top: 30px;
+		  font-weight: bold;
+		  color: #2c3e50;
+		}
+		
+		.content {
+		  max-width: 70%;
+		  margin-top: 70px;
+		  margin-left: auto;
+		  margin-right: auto;
+		  padding-left: 1.5rem;
+		  padding-right: 1.5rem;
+		  padding-top: 1.5rem;
+		  padding-bottom: 1.5rem;
+		  display: block
+		}
+		
+		.container {
+		  background: linear-gradient(135deg, #dff5e1, #fff6cc);
+		  width: 80%
+		  border-radius: 0.5rem;
+		  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+		  padding: 1rem;
+		  position: sticky;
+		}
+		
+		.container img {
+		  width: 90%;
+		  height: auto;
+		  align-items: center;
+		  display: block;
+		  padding: 0px 0px 0px 0px
+		  margin: auto;
+		}
+	</style>
+</head>
+
+<body class="ch1">
+	<header class="header" id="sdhead">
+			<div class="header-container" id="sdhc">
+				<div class="brand-text-group" id="sdbrand">
+					<span class="brand-name" id="sdbn">EcoScientia</span>
+				</div>
+			</div>
+	</header>
+	
+	<main class="content">
+		<div class="container">
+			<img src="sprout.png">
+		</div>
+		
+		<div class="game container" id="game-container">
+		
+			<h2 id="question-text">Activity 1: Protect or Neglect?</h2>
+			<h3>Instructions</h3>
+			<p>In this activity, you will read two different scenarios in each set. Think carefully about both choices and decide which one you would rather choose.</p>
+			<h3>Would you rather...</h3>
+			
+			<div class="options">
+				<button id="btn1" onclick="handleChoice(1)">Option A</button>
+				<p>OR</p>
+				<button id="btn2" onclick="handleChoice(2)">Option B</button>
+			</div>
+			
+			<p id="result-display"></p>
+			<button id="next-btn" onclick="nextQuestion()" style="display: none; margin: 20px auto; background-color: #97FCC2;">Next Question</button>
+		
+		<button onclick="window.location.href='ch2.html'">Finish Activity</button>
+		<button onclick="window.location.href='student-assignments.html'">⬅ Back to Dashboard</button>
+		
+		</div>
+		
+<script>
+	// A list of question objects
+	const question = [
+		{ a: "Allow part of the forest to be cleared to create jobs for the community", b: "Stop the project even if it limits local income opportunities" },
+		{ a: "Prevent a factory to operate and reduce employment for residents", b: "Permit the factory even it may release treated waste into a river" },
+		{ a: "Continue farming practices that use chemical pesticieds to secure high crop yields", b: "Reduce their use even if food production might decrease" },
+		{ a: "Develop new road that passes through wildlife habitat to improve transportation", b: "Keep longer routes even it consumes more fuel and time" },
+		{ a: "Restrict visitors and affect businesses that depend on tourists", b: "Promote tourism in a natural area even if it increases trash and disturbance" }
+	];
+	
+	let currentIndex = 0;
+	
+	function loadQuestion() {
+		const q = questions[currentIndex];
+		document.getElementById('btn1').innerText =	q.a;
+		document.getElementById('btn2').innerText =	q.b;
+		document.getElementById('result-display').innerText = "";
+		document.getEmelentById('next-btn').style.display = "none";
+		}
+		
+	function nextQuestion() {
+		currentIndex++;
+		if (currentIndex < questions.length) { loadQuestion();
+		} else {
+		document.getElementById('game-container').innerHTML = "<h2>Thanks for playing!</h2>;
+		}
+	}
+	
+	// Start the game by loading the first Question
+	loadQuestion();
+	
+</script>
+</body>
+</html>
