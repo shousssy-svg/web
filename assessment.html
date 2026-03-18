@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>EcoScientia: Student Dashboard</title>
+	<link rel="stylesheet" type= ="text/css" href="styles.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Notable&family=Quattrocento:wght@400;700&display=swap" rel="stylesheet">
+	<style>
+		* {
+		  box-sizing: border-box;
+		  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+		}
+
+		body {
+		  margin: 0;
+		  min-height: 100vh;
+		  display: flex;
+		  justify-content: center;
+		  align-items: center;
+		  background: linear-gradient(135deg, #dff5e1, #fff6cc);
+		  background-image: URL("bg.png");
+			background-size: cover;
+			background-repeat: no-repeat;
+			background-position: center;
+			background-opacity: 0.5;
+		}
+		
+		.header {
+		  position: fixed;
+		  top: 0;
+
+		  width: 100%;
+		  height: 60px;
+
+		  background-color: #2f7d32;
+		  color: white;
+
+		  display: flex;
+		  align-items: center;
+		  padding: 0 20px;
+
+		  z-index: 1000;
+		}
+
+		.content {
+		  max-width: 70%;
+		  margin-top: 70px;
+		  margin-left: auto;
+		  margin-right: auto;
+		  padding-left: 1.5rem;
+		  padding-right: 1.5rem;
+		  padding-top: 1.5rem;
+		  padding-bottom: 1.5rem;
+		  display: block
+		}
+		
+		.container {
+		  background: linear-gradient(135deg, #dff5e1, #fff6cc);
+		  width: 80%
+		  border-radius: 0.5rem;
+		  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+		  padding: 1rem;
+		  position: sticky;
+		}
+		
+		.container img {
+		  width: 90%;
+		  height: auto;
+		  align-items: center;
+		  display: block;
+		  padding: 0px 0px 0px 0px
+		  margin: auto;
+		}
+
+		.quiz-content {
+		  background: white;
+		  max-width: 600px;
+		  width: 100%;
+		  padding: 30px;
+		  border-radius: 20px;
+		  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+		}
+		
+		#progress-container {
+		  width: 10%;
+		  height: 100%;
+		  background: #e0e0e0;
+		  border-radius: 5px;
+		  margin-bottom: 30px;
+		}
+		
+		#progress-bar {
+		  width: 10%;
+		  height: 100%;
+		  background: #3498db;
+		  border-radius: 5px;
+		  transition: width 0.4s ease;
+		}
+		
+		h2 { color: #2c3e50; font-size: 1.2rem; margin-bottom: 10px; }
+		
+		#question-text {
+		  font-size: 1.5rem;
+		  font-weight: 600;
+		  margin-bottom: 25px;
+		  color: #34495e;
+		}
+		
+		.options-grip {
+		  display: flex;
+		  flex-direction: column;
+		  gap: 12px;
+		}
+		
+		.option-btn {
+		  padding: 15px 20px;
+		  border: 2px solid #ecf0f1;
+		  border-radius: 12px;
+		  background: white;
+		  cursor: pointer;
+		  font-size: 1rem;
+		  text-align: left;
+		  transition: all 0.2s;
+		}
+		
+		.option-btn:hover {
+		  border-color: #3498db;
+		  background-color: #ebf5fb;
+		  transform: translateX(5px);
+		}
+	</style>
+</head>
+
+<body class="assessment">
+	<header class="header" id="sdhead">
+			<div class="header-container" id="sdhc">
+				<div class="brand-text-group" id="sdbrand">
+					<span class="brand-name" id="sdbn">EcoScientia</span>
+				</div>
+			</div>
+	</header>
+	
+	<main class="content">
+		<div class="container">
+			<img src="sprout.png">
+		</div>
+		
+		<div class="quiz container" id="quiz-container">
+			
+			<h2>Assessment: Let's Wrap It Up!</h2>
+			<p>Read each situation carefully and choose the option that best shows a responsible and values-based response.</p>
+			
+			<div class="progress-container">
+				<div id="progress-bar"></div>
+			</div>
+			
+			<div id="quiz-box">
+				<h3 id="question-number">Question 1 of 10</h3>
+			
+				<p id="question-text">Loading question...</p>
+				
+				<div class="options-grid" id="options-container">
+					</div>
+			</div>
+			
+			<div id="result-screen" style="display: none;">
+				<h3>Assessment Complete!</h3>
+				<p>Thank you for sharing your thoughts. Your responses have been recorded.</p>
+				<button onclick="location.reload()">Restart</button>
+			</div>
+		
+			<button onclick="window.location.href='ch5.html'">Finish Activity</button>
+			<button onclick="window.location.href='student-assignments.html'">⬅ Back to Dashboard</button>
+			
+		</div>
+		
+	<script>
+		const questions = [
+			{ q: "After learning how human activities damage ecosystems, you realize that your daily habits:", a: ["influence the environment and reflect your personal values", "affect nature only in small, unimportant ways", "rarely affect the environment", "affect nature only when laws are violated"] },
+			{ q: "When you feel tempted to use single-use plastics for convinience, the best response is to:", a: ["ignore the feeling and continue the habit", "feel auilty but take no action", "manage your choices by using eco-friendly alternatives", "wait for others to change first"] },
+			{ q: "Communities near polluted areas often suffer health and livelihood problems. This situation shows that:", a: ["environmental issues only affect wildlife", "pollution main affects industries", "environmental harm impacts both people and ecosystems", "people should adapt without complain"] },
+			{ q: "If a classmate is careless about throwing trash, the most appropriate response is to:", a: ["scold them publicly", "calmly remind them and encourage proper waste disposal", "ignore the behavior", "report them immediately"] },
+			{ q: "Before suuporting a development project that may harm an ecosystem, you should:", a: ["focus only on economic benefits", "consider short-term human needs", "follow popular opinion", "weigh environmental, social and long-term effects"] },
+			{ q: "When you realize your actions contribute to environmental problems, the best reaction is to:", a: ["deny responsibility", "blame larger industries", "acknowledge your role and commit to improvement", "stop thinking about the issue"] },
+			{ q: "To reduce your negative impact on the environment, the most effective personal action is to:", a: ["act only when it is convenient", "change behaviors even when it requires effort", "rely on rules to guide actions", "wait for school programs to intervene"] },
+			{ q: "Understanding that future generations will depend on today's ecosystems encourages you to:", a: ["respect the rights of future generations", "leave responsibility to future leaders", "focus on present needs only", "prioritize technology over nature"] },
+			{ q: "Working with others to protect the environment if effective because it __________", a: ["reduces individual responsibility", "builds cooperation and shred accountability", "avoid personal efforts", "limits personal decision-making"] },
+			{ q: "Choosing environmentally friendly products shows that you:", a: ["follows trends", "act to impress others", "consider the consequences of your choices", "avoid responsibility for larger problems"] }
+		];
+		
+		let currentStep = 0;
+		
+		function loadQuestion() {
+			const qData = questions[currentStep];
+			const bar = document.getElementById('progress-bar');
+			const qText = document.getElementById('question-text');
+			const qNum = document.getElementById('question-number');
+			const optionsContainer = document.getElementById('options-container');
+			
+			// Update Progress and header
+			bar.style.width = ((currentStep + 1) / questions.length) * 100+ "%";
+			qNum.innerText = Question $ {currentStep + 1} of 10;
+			qText.innerText = qData.q;
+			
+			// Clear and build options-container
+			optionsContainer.innerHTML = "";
+			qData.a.forEach(answer => {
+				const btn = document.createElement('button');
+				btn.className = 'option-btn';
+				btn-innerText = answer;
+				btn.onclick = () => handleAnswer();
+				
+			optionsContainer.appendChild(btn);
+				});
+			}
+			
+			function handleAnswer() {
+				currentStep++;
+				if (currentStep < questions.length) {
+					loadQuestion(); } else {
+					document.getElementById('quiz-box').style.display = "none";
+					document.getElementById('result-screen').style.display = "block";
+					document.getElementById('progress-bar').style.width = "100%";
+				}
+			}
+			
+			// Start the Assessment
+			loadQuestion();
+			
+	</script>
+</body>
+</html>
